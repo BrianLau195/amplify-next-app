@@ -18,26 +18,23 @@ export default function InvoiceCreateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    addressId: "",
     invoiceType: "",
     amount: "",
     invoiceDate: "",
     invoiceStatus: "",
   };
-  const [addressId, setAddressId] = React.useState(initialValues.addressId);
   const [invoiceType, setInvoiceType] = React.useState(
-    initialValues.invoiceType,
+    initialValues.invoiceType
   );
   const [amount, setAmount] = React.useState(initialValues.amount);
   const [invoiceDate, setInvoiceDate] = React.useState(
-    initialValues.invoiceDate,
+    initialValues.invoiceDate
   );
   const [invoiceStatus, setInvoiceStatus] = React.useState(
-    initialValues.invoiceStatus,
+    initialValues.invoiceStatus
   );
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setAddressId(initialValues.addressId);
     setInvoiceType(initialValues.invoiceType);
     setAmount(initialValues.amount);
     setInvoiceDate(initialValues.invoiceDate);
@@ -45,7 +42,6 @@ export default function InvoiceCreateForm(props) {
     setErrors({});
   };
   const validations = {
-    addressId: [],
     invoiceType: [],
     amount: [],
     invoiceDate: [],
@@ -54,7 +50,7 @@ export default function InvoiceCreateForm(props) {
   const runValidationTasks = async (
     fieldName,
     currentValue,
-    getDisplayValue,
+    getDisplayValue
   ) => {
     const value =
       currentValue && getDisplayValue
@@ -77,7 +73,6 @@ export default function InvoiceCreateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          addressId,
           invoiceType,
           amount,
           invoiceDate,
@@ -88,16 +83,16 @@ export default function InvoiceCreateForm(props) {
             if (Array.isArray(modelFields[fieldName])) {
               promises.push(
                 ...modelFields[fieldName].map((item) =>
-                  runValidationTasks(fieldName, item),
-                ),
+                  runValidationTasks(fieldName, item)
+                )
               );
               return promises;
             }
             promises.push(
-              runValidationTasks(fieldName, modelFields[fieldName]),
+              runValidationTasks(fieldName, modelFields[fieldName])
             );
             return promises;
-          }, []),
+          }, [])
         );
         if (validationResponses.some((r) => r.hasError)) {
           return;
@@ -136,34 +131,6 @@ export default function InvoiceCreateForm(props) {
       {...rest}
     >
       <TextField
-        label="Address id"
-        isRequired={false}
-        isReadOnly={false}
-        value={addressId}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              addressId: value,
-              invoiceType,
-              amount,
-              invoiceDate,
-              invoiceStatus,
-            };
-            const result = onChange(modelFields);
-            value = result?.addressId ?? value;
-          }
-          if (errors.addressId?.hasError) {
-            runValidationTasks("addressId", value);
-          }
-          setAddressId(value);
-        }}
-        onBlur={() => runValidationTasks("addressId", addressId)}
-        errorMessage={errors.addressId?.errorMessage}
-        hasError={errors.addressId?.hasError}
-        {...getOverrideProps(overrides, "addressId")}
-      ></TextField>
-      <TextField
         label="Invoice type"
         isRequired={false}
         isReadOnly={false}
@@ -172,7 +139,6 @@ export default function InvoiceCreateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              addressId,
               invoiceType: value,
               amount,
               invoiceDate,
@@ -200,7 +166,6 @@ export default function InvoiceCreateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              addressId,
               invoiceType,
               amount: value,
               invoiceDate,
@@ -229,7 +194,6 @@ export default function InvoiceCreateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              addressId,
               invoiceType,
               amount,
               invoiceDate: value,
@@ -257,7 +221,6 @@ export default function InvoiceCreateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              addressId,
               invoiceType,
               amount,
               invoiceDate,

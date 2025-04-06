@@ -11,8 +11,12 @@ export const createAddress = /* GraphQL */ `
       address
       createdAt
       id
+      invoices {
+        nextToken
+        __typename
+      }
       nickname
-      owner
+      tenants
       updatedAt
       __typename
     }
@@ -24,7 +28,15 @@ export const createInvoice = /* GraphQL */ `
     $input: CreateInvoiceInput!
   ) {
     createInvoice(condition: $condition, input: $input) {
-      Admin
+      address {
+        address
+        createdAt
+        id
+        nickname
+        tenants
+        updatedAt
+        __typename
+      }
       addressId
       amount
       createdAt
@@ -32,24 +44,8 @@ export const createInvoice = /* GraphQL */ `
       invoiceDate
       invoiceStatus
       invoiceType
+      tenants
       updatedAt
-      __typename
-    }
-  }
-`;
-export const createTenant = /* GraphQL */ `
-  mutation CreateTenant(
-    $condition: ModelTenantConditionInput
-    $input: CreateTenantInput!
-  ) {
-    createTenant(condition: $condition, input: $input) {
-      addressId
-      createdAt
-      email
-      id
-      name
-      updatedAt
-      userId
       __typename
     }
   }
@@ -63,8 +59,12 @@ export const deleteAddress = /* GraphQL */ `
       address
       createdAt
       id
+      invoices {
+        nextToken
+        __typename
+      }
       nickname
-      owner
+      tenants
       updatedAt
       __typename
     }
@@ -76,7 +76,15 @@ export const deleteInvoice = /* GraphQL */ `
     $input: DeleteInvoiceInput!
   ) {
     deleteInvoice(condition: $condition, input: $input) {
-      Admin
+      address {
+        address
+        createdAt
+        id
+        nickname
+        tenants
+        updatedAt
+        __typename
+      }
       addressId
       amount
       createdAt
@@ -84,24 +92,8 @@ export const deleteInvoice = /* GraphQL */ `
       invoiceDate
       invoiceStatus
       invoiceType
+      tenants
       updatedAt
-      __typename
-    }
-  }
-`;
-export const deleteTenant = /* GraphQL */ `
-  mutation DeleteTenant(
-    $condition: ModelTenantConditionInput
-    $input: DeleteTenantInput!
-  ) {
-    deleteTenant(condition: $condition, input: $input) {
-      addressId
-      createdAt
-      email
-      id
-      name
-      updatedAt
-      userId
       __typename
     }
   }
@@ -115,8 +107,12 @@ export const updateAddress = /* GraphQL */ `
       address
       createdAt
       id
+      invoices {
+        nextToken
+        __typename
+      }
       nickname
-      owner
+      tenants
       updatedAt
       __typename
     }
@@ -128,7 +124,15 @@ export const updateInvoice = /* GraphQL */ `
     $input: UpdateInvoiceInput!
   ) {
     updateInvoice(condition: $condition, input: $input) {
-      Admin
+      address {
+        address
+        createdAt
+        id
+        nickname
+        tenants
+        updatedAt
+        __typename
+      }
       addressId
       amount
       createdAt
@@ -136,24 +140,8 @@ export const updateInvoice = /* GraphQL */ `
       invoiceDate
       invoiceStatus
       invoiceType
+      tenants
       updatedAt
-      __typename
-    }
-  }
-`;
-export const updateTenant = /* GraphQL */ `
-  mutation UpdateTenant(
-    $condition: ModelTenantConditionInput
-    $input: UpdateTenantInput!
-  ) {
-    updateTenant(condition: $condition, input: $input) {
-      addressId
-      createdAt
-      email
-      id
-      name
-      updatedAt
-      userId
       __typename
     }
   }

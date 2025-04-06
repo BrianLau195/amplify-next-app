@@ -5,14 +5,18 @@
 export const onCreateAddress = /* GraphQL */ `
   subscription OnCreateAddress(
     $filter: ModelSubscriptionAddressFilterInput
-    $owner: String
+    $tenants: String
   ) {
-    onCreateAddress(filter: $filter, owner: $owner) {
+    onCreateAddress(filter: $filter, tenants: $tenants) {
       address
       createdAt
       id
+      invoices {
+        nextToken
+        __typename
+      }
       nickname
-      owner
+      tenants
       updatedAt
       __typename
     }
@@ -20,11 +24,19 @@ export const onCreateAddress = /* GraphQL */ `
 `;
 export const onCreateInvoice = /* GraphQL */ `
   subscription OnCreateInvoice(
-    $Admin: String
     $filter: ModelSubscriptionInvoiceFilterInput
+    $tenants: String
   ) {
-    onCreateInvoice(Admin: $Admin, filter: $filter) {
-      Admin
+    onCreateInvoice(filter: $filter, tenants: $tenants) {
+      address {
+        address
+        createdAt
+        id
+        nickname
+        tenants
+        updatedAt
+        __typename
+      }
       addressId
       amount
       createdAt
@@ -32,24 +44,8 @@ export const onCreateInvoice = /* GraphQL */ `
       invoiceDate
       invoiceStatus
       invoiceType
+      tenants
       updatedAt
-      __typename
-    }
-  }
-`;
-export const onCreateTenant = /* GraphQL */ `
-  subscription OnCreateTenant(
-    $filter: ModelSubscriptionTenantFilterInput
-    $userId: String
-  ) {
-    onCreateTenant(filter: $filter, userId: $userId) {
-      addressId
-      createdAt
-      email
-      id
-      name
-      updatedAt
-      userId
       __typename
     }
   }
@@ -57,14 +53,18 @@ export const onCreateTenant = /* GraphQL */ `
 export const onDeleteAddress = /* GraphQL */ `
   subscription OnDeleteAddress(
     $filter: ModelSubscriptionAddressFilterInput
-    $owner: String
+    $tenants: String
   ) {
-    onDeleteAddress(filter: $filter, owner: $owner) {
+    onDeleteAddress(filter: $filter, tenants: $tenants) {
       address
       createdAt
       id
+      invoices {
+        nextToken
+        __typename
+      }
       nickname
-      owner
+      tenants
       updatedAt
       __typename
     }
@@ -72,11 +72,19 @@ export const onDeleteAddress = /* GraphQL */ `
 `;
 export const onDeleteInvoice = /* GraphQL */ `
   subscription OnDeleteInvoice(
-    $Admin: String
     $filter: ModelSubscriptionInvoiceFilterInput
+    $tenants: String
   ) {
-    onDeleteInvoice(Admin: $Admin, filter: $filter) {
-      Admin
+    onDeleteInvoice(filter: $filter, tenants: $tenants) {
+      address {
+        address
+        createdAt
+        id
+        nickname
+        tenants
+        updatedAt
+        __typename
+      }
       addressId
       amount
       createdAt
@@ -84,24 +92,8 @@ export const onDeleteInvoice = /* GraphQL */ `
       invoiceDate
       invoiceStatus
       invoiceType
+      tenants
       updatedAt
-      __typename
-    }
-  }
-`;
-export const onDeleteTenant = /* GraphQL */ `
-  subscription OnDeleteTenant(
-    $filter: ModelSubscriptionTenantFilterInput
-    $userId: String
-  ) {
-    onDeleteTenant(filter: $filter, userId: $userId) {
-      addressId
-      createdAt
-      email
-      id
-      name
-      updatedAt
-      userId
       __typename
     }
   }
@@ -109,14 +101,18 @@ export const onDeleteTenant = /* GraphQL */ `
 export const onUpdateAddress = /* GraphQL */ `
   subscription OnUpdateAddress(
     $filter: ModelSubscriptionAddressFilterInput
-    $owner: String
+    $tenants: String
   ) {
-    onUpdateAddress(filter: $filter, owner: $owner) {
+    onUpdateAddress(filter: $filter, tenants: $tenants) {
       address
       createdAt
       id
+      invoices {
+        nextToken
+        __typename
+      }
       nickname
-      owner
+      tenants
       updatedAt
       __typename
     }
@@ -124,11 +120,19 @@ export const onUpdateAddress = /* GraphQL */ `
 `;
 export const onUpdateInvoice = /* GraphQL */ `
   subscription OnUpdateInvoice(
-    $Admin: String
     $filter: ModelSubscriptionInvoiceFilterInput
+    $tenants: String
   ) {
-    onUpdateInvoice(Admin: $Admin, filter: $filter) {
-      Admin
+    onUpdateInvoice(filter: $filter, tenants: $tenants) {
+      address {
+        address
+        createdAt
+        id
+        nickname
+        tenants
+        updatedAt
+        __typename
+      }
       addressId
       amount
       createdAt
@@ -136,24 +140,8 @@ export const onUpdateInvoice = /* GraphQL */ `
       invoiceDate
       invoiceStatus
       invoiceType
+      tenants
       updatedAt
-      __typename
-    }
-  }
-`;
-export const onUpdateTenant = /* GraphQL */ `
-  subscription OnUpdateTenant(
-    $filter: ModelSubscriptionTenantFilterInput
-    $userId: String
-  ) {
-    onUpdateTenant(filter: $filter, userId: $userId) {
-      addressId
-      createdAt
-      email
-      id
-      name
-      updatedAt
-      userId
       __typename
     }
   }

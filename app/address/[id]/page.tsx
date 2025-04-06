@@ -27,7 +27,7 @@ export default function AddressPage() {
 
   return (
     <div>
-      <h1>Address {address?.nickname}</h1>
+      <h1>{address?.nickname}</h1>
       <button onClick={() => router.back()}>Back</button>
     </div>
   );

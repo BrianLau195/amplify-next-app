@@ -8,8 +8,12 @@ export const getAddress = /* GraphQL */ `
       address
       createdAt
       id
+      invoices {
+        nextToken
+        __typename
+      }
       nickname
-      owner
+      tenants
       updatedAt
       __typename
     }
@@ -18,7 +22,15 @@ export const getAddress = /* GraphQL */ `
 export const getInvoice = /* GraphQL */ `
   query GetInvoice($id: ID!) {
     getInvoice(id: $id) {
-      Admin
+      address {
+        address
+        createdAt
+        id
+        nickname
+        tenants
+        updatedAt
+        __typename
+      }
       addressId
       amount
       createdAt
@@ -26,21 +38,8 @@ export const getInvoice = /* GraphQL */ `
       invoiceDate
       invoiceStatus
       invoiceType
+      tenants
       updatedAt
-      __typename
-    }
-  }
-`;
-export const getTenant = /* GraphQL */ `
-  query GetTenant($id: ID!) {
-    getTenant(id: $id) {
-      addressId
-      createdAt
-      email
-      id
-      name
-      updatedAt
-      userId
       __typename
     }
   }
@@ -48,16 +47,24 @@ export const getTenant = /* GraphQL */ `
 export const listAddresses = /* GraphQL */ `
   query ListAddresses(
     $filter: ModelAddressFilterInput
+    $id: ID
     $limit: Int
     $nextToken: String
+    $sortDirection: ModelSortDirection
   ) {
-    listAddresses(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listAddresses(
+      filter: $filter
+      id: $id
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
       items {
         address
         createdAt
         id
         nickname
-        owner
+        tenants
         updatedAt
         __typename
       }
@@ -74,7 +81,6 @@ export const listInvoices = /* GraphQL */ `
   ) {
     listInvoices(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
-        Admin
         addressId
         amount
         createdAt
@@ -82,29 +88,8 @@ export const listInvoices = /* GraphQL */ `
         invoiceDate
         invoiceStatus
         invoiceType
+        tenants
         updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const listTenants = /* GraphQL */ `
-  query ListTenants(
-    $filter: ModelTenantFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listTenants(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        addressId
-        createdAt
-        email
-        id
-        name
-        updatedAt
-        userId
         __typename
       }
       nextToken
